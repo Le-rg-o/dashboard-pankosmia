@@ -129,7 +129,7 @@ async function loadProject(token) {
     const page = project.items;
     for (const item of page.nodes) {
       const issue = item.content;
-      if (!issue) continue;
+      if (!issue?.assignees?.nodes || !issue.repository?.name) continue;
       const statusField = item.fieldValues.nodes.find((field) => field.field?.name === "Status");
       issues.push({
         ...issue,
