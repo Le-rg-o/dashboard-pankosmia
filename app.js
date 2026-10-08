@@ -202,7 +202,7 @@ function renderStatuses(issues) {
     const number = document.createElement("span");
     number.className = "status-number";
     number.textContent = String(count);
-    description.append(number, document.createTextNode(pluralize(count, "issue")));
+    description.append(number, document.createTextNode(count === 1 ? " issue" : " issues"));
     card.append(heading, description);
     elements.statusSummary.append(card);
     elements.statusFilter.add(new Option(status, status));
@@ -296,7 +296,7 @@ function renderProject(title) {
   renderStatuses(projectIssues);
   renderRows();
   elements.refreshButton.disabled = false;
-  announce(`${title} loaded: ${pluralize(projectIssues.length, "issue")} across ${pluralize(repositories.length, "public repository")}.`, "success");
+  announce(`${title} loaded: ${pluralize(projectIssues.length, "issue")} across ${pluralize(repositories.length, "public repository", "public repositories")}.`, "success");
 }
 
 async function refreshProject() {
@@ -357,7 +357,7 @@ elements.createForm.addEventListener("submit", prepareIssue);
 
 loadRepositories()
   .then(() => {
-    announce(`${pluralize(repositories.length, "public repository")} loaded. Enter a token to load project issues.`, "success");
+    announce(`${pluralize(repositories.length, "public repository", "public repositories")} loaded. Enter a token to load project issues.`, "success");
   })
   .catch((error) => {
     announce(`Could not load public repositories: ${error.message}`, "error");

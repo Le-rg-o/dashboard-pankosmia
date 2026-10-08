@@ -6,6 +6,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname);
 const port = Number(process.env.PORT) || 4173;
+const publicFiles = new Set(["/index.html", "/app.js", "/styles.css"]);
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
@@ -29,6 +30,11 @@ http.createServer((request, response) => {
   }
 
   const requestedPath = pathname === "/" ? "/index.html" : pathname;
+  if (!publicFiles.has(requestedPath)) {
+    response.writeHead(404);
+    response.end("Not found");
+    return;
+  }
   const filePath = path.resolve(root, `.${requestedPath}`);
   if (!filePath.startsWith(`${root}${path.sep}`)) {
     response.writeHead(403);
