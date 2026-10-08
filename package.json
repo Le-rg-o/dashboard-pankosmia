@@ -2,7 +2,7 @@
   "name": "dashboard-pankosmia",
   "version": "1.0.0",
   "private": true,
-  "description": "Local dashboard for the public Pankosmia GitHub project",
+  "description": "Static Pankosmia project dashboard for GitHub Pages, with an optional local Node.js server",
   "scripts": {
     "start": "node server.js",
     "check": "node --check server.js && node --check app.js"
