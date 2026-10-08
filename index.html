@@ -138,7 +138,7 @@
             </div>
             <div class="form-field">
               <label for="new-title">Title <span class="required">(required)</span></label>
-              <input id="new-title" name="title" maxlength="256" required>
+              <input id="new-title" name="title" maxlength="256" pattern=".*\S.*" title="Enter a title containing at least one non-whitespace character." required>
             </div>
             <div class="form-field full-width">
               <label for="new-description">Description</label>
