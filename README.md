@@ -20,6 +20,10 @@ The dashboard loads the public repository list without a token. GitHub requires 
 
 The token is kept in memory in the open browser tab only; it is not saved to disk or sent anywhere except `api.github.com`. Clear the field or close the tab to discard it. Do not use a token with write permissions.
 
+## GitHub Pages (no installation)
+
+The dashboard is fully static and is deployed by `.github/workflows/pages.yml` from the `main` branch of this repository (`Le-rg-o/dashboard-pankosmia`). One-time setup: in **Settings → Pages**, set **Source** to **GitHub Actions**. It is then available at `https://le-rg-o.github.io/dashboard-pankosmia/`, with nothing to install on Windows. Nothing is written to the Pankosmia organization.
+
 ## Dashboard features
 
 - Lists public organization repositories and defaults the issue form to `roadmap`.
