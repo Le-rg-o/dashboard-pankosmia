@@ -82,7 +82,11 @@ const PROJECT_QUERY = `
               nodes {
                 ... on ProjectV2ItemFieldSingleSelectValue {
                   name
-                  field { name }
+                  field {
+                    ... on ProjectV2SingleSelectField {
+                      name
+                    }
+                  }
                 }
               }
             }
