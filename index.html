@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <title>Pankosmia project dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="Pankosmia dashboard home">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span>Pankosmia <span class="brand-light">project dashboard</span></span>
+        </a>
+        <a class="github-link" href="https://github.com/pankosmia" target="_blank" rel="noopener noreferrer">
+          View Pankosmia on GitHub <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main" class="page">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Organization overview</p>
+        <h1 id="page-title">Project dashboard</h1>
+        <p class="intro-copy">A live overview of issues in the Pankosmia project, across its public repositories.</p>
+      </section>
+
+      <section class="connection-panel panel" aria-labelledby="connection-title">
+        <div class="panel-copy">
+          <h2 id="connection-title">Connect to the project board</h2>
+          <p>GitHub requires a personal access token to read organization project-board data. It is used only in this browser session and is never saved.</p>
+        </div>
+        <form id="token-form" class="token-form">
+          <label for="token">GitHub token</label>
+          <div class="token-controls">
+            <input id="token" name="token" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" aria-describedby="token-help">
+            <button class="button button-primary" type="submit">Load project</button>
+          </div>
+          <p class="field-hint" id="token-help">Use a fine-grained token with read-only organization Projects access. See the README for details.</p>
+        </form>
+      </section>
+
+      <p id="announcement" class="announcement" role="status" aria-live="polite">Loading public repositories…</p>
+
+      <section class="metrics-section" aria-labelledby="metrics-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">At a glance</p>
+            <h2 id="metrics-title">Issue overview</h2>
+          </div>
+          <button id="refresh-button" class="button button-secondary" type="button" disabled>Refresh data</button>
+        </div>
+        <div id="metric-cards" class="metric-grid" aria-live="polite">
+          <article class="metric-card"><h3>Project issues</h3><p class="metric-value">—</p></article>
+          <article class="metric-card"><h3>Unassigned</h3><p class="metric-value">—</p></article>
+          <article class="metric-card"><h3>Not updated in 30+ days</h3><p class="metric-value">—</p></article>
+          <article class="metric-card"><h3>Checklist progress</h3><p class="metric-value">—</p></article>
+        </div>
+      </section>
+
+      <section class="board-section" aria-labelledby="board-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Project #9</p>
+            <h2 id="board-title">Issues by status</h2>
+          </div>
+        </div>
+        <div id="status-summary" class="status-summary" aria-live="polite">
+          <p class="empty-state">Connect with a GitHub token to load project statuses.</p>
+        </div>
+      </section>
+
+      <section class="issues-section" aria-labelledby="issues-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Project items</p>
+            <h2 id="issues-title">Issues</h2>
+          </div>
+          <p id="issue-count" class="result-count">Connect to load issues</p>
+        </div>
+        <form id="filter-form" class="filters" role="search" aria-label="Filter project issues">
+          <div class="filter-field search-field">
+            <label for="search">Search issues</label>
+            <input id="search" type="search" placeholder="Title, repository, or assignee">
+          </div>
+          <div class="filter-field">
+            <label for="status-filter">Status</label>
+            <select id="status-filter" disabled>
+              <option value="">All statuses</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="repository-filter">Repository</label>
+            <select id="repository-filter" disabled>
+              <option value="">All repositories</option>
+            </select>
+          </div>
+        </form>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Project issues table">
+          <table>
+            <caption class="visually-hidden">Pankosmia project issues, including status, repository, assignee, age, and checklist progress</caption>
+            <thead>
+              <tr>
+                <th scope="col">Issue</th>
+                <th scope="col">Status</th>
+                <th scope="col">Assignee</th>
+                <th scope="col">Age</th>
+                <th scope="col">Last updated</th>
+                <th scope="col">Progress</th>
+              </tr>
+            </thead>
+            <tbody id="issue-rows">
+              <tr><td colspan="6" class="table-empty">Load the project board to see its issues.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="create-section panel" aria-labelledby="create-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GitHub handoff</p>
+            <h2 id="create-title">Prepare a new issue</h2>
+          </div>
+        </div>
+        <p class="section-copy">Review and create the issue on GitHub. Nothing is written to the Pankosmia organization from this dashboard.</p>
+        <form id="create-form" class="create-form">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="new-repository">Repository <span class="required">(required)</span></label>
+              <select id="new-repository" name="repository" required>
+                <option value="roadmap">Loading public repositories…</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="new-title">Title <span class="required">(required)</span></label>
+              <input id="new-title" name="title" maxlength="256" pattern=".*\S.*" title="Enter a title containing at least one non-whitespace character." required>
+            </div>
+            <div class="form-field full-width">
+              <label for="new-description">Description</label>
+              <textarea id="new-description" name="description" rows="5"></textarea>
+            </div>
+            <div class="form-field">
+              <label for="new-assignee">Assignee</label>
+              <input id="new-assignee" name="assignee" autocomplete="off" placeholder="GitHub username">
+            </div>
+            <div class="form-field">
+              <label for="new-labels">Labels</label>
+              <input id="new-labels" name="labels" placeholder="Separate labels with commas">
+            </div>
+            <div class="form-field">
+              <label for="new-project">Project</label>
+              <input id="new-project" name="project" value="Pankosmia" placeholder="Project name">
+            </div>
+            <div class="form-field">
+              <label for="new-relationship">Relationship</label>
+              <input id="new-relationship" name="relationship" placeholder="Related issue URL or number">
+            </div>
+          </div>
+          <p class="field-hint">Title, description, assignee, and labels are prefilled on GitHub. Project and relationship are added to the draft description for you to apply there.</p>
+          <button class="button button-primary" type="submit">Continue to GitHub</button>
+        </form>
+      </section>
+
+      <footer class="page-footer">
+        <p>Data is fetched from GitHub’s public API. Project status requires the read-only token described above.</p>
+      </footer>
+    </main>
+  </body>
+</html>
